@@ -19,7 +19,7 @@ const useUserSuggestions = (followedUserIds) => {
           (user) => !followedUserIds.includes(user.id)
         );
         setUsers(usersNotFollowed);
-        setUsersInBasket(usersNotFollowed.slice(0, 4));
+        setUsersInBasket(usersNotFollowed.slice(0, 8));
       })
       .catch((error) => console.error(error));
   }, [followedUserIds]);

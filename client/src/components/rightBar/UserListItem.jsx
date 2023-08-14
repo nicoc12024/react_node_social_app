@@ -1,6 +1,7 @@
 import ListItem from "@mui/material/ListItem";
 import IconButton from "@mui/material/IconButton";
 import ListItemText from "@mui/material/ListItemText";
+import { Link } from "react-router-dom";
 
 const UserListItem = ({ item, handleFollowUserInBasket, handleFollow, currentUser }) => {
   if (item.id === currentUser.id) {
@@ -24,15 +25,17 @@ const UserListItem = ({ item, handleFollowUserInBasket, handleFollow, currentUse
         </IconButton>
       }
     >
-      <div>
-        <img
-          src={`/upload/${item.id}/${item.profilePicture}`}
-          className="w-[40px] h-[40px] rounded-full object-cover"
-          alt={item.name}
-          loading="lazy"
-        />
-      </div>
-      <ListItemText primary={item.name} />
+      <Link to={`/profile/${item.id}`}>
+        <div className="flex items-center gap-2">
+          <img
+            src={`/upload/${item.id}/${item.profilePicture}`}
+            className="w-[40px] h-[40px] rounded-full object-cover"
+            alt={item.name}
+            loading="lazy"
+          />
+          <ListItemText primary={item.name} />
+        </div>
+      </Link>
     </ListItem>
   );
 };
