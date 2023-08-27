@@ -29,14 +29,14 @@ import ShareButton from "./ShareButton";
  */
 
 const SharePost = () => {
-  const { file, setFile, description, setDescription, isSubmitting, handleShare } =
+  const { file, setFile, description, setDescription, handleShare, showError } =
     useSharePost();
 
   const { currentUser } = useContext(AuthContext);
 
   return (
     <div className="shadow-md rounded-[20px] bg-white text-[#555] mb-5">
-      <div className="p-5">
+      <form className="p-5">
         <div className="flex items-center justify-between gap-5">
           <div className="flex items-center w-full">
             <UserProfilePicture
@@ -58,11 +58,14 @@ const SharePost = () => {
           </div>
         </div>
         <hr className="my-2" />
+        {showError && (
+          <div className="text-red-500 mb-2 text-sm">Please write something</div>
+        )}
         <div className="flex items-center justify-between">
           <ImageUploader file={file} setFile={setFile} />
-          <ShareButton onClick={handleShare} isSubmitting={isSubmitting} />
+          <ShareButton onClick={handleShare} />
         </div>
-      </div>
+      </form>
     </div>
   );
 };

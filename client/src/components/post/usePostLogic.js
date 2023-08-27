@@ -8,6 +8,7 @@ export const usePostLogic = ({ currentUser, post }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [editedDescription, setEditedDescription] = useState(post.description);
+  const [showError, setShowError] = useState(false);
 
   const menuRef = useRef(null);
   const textAreaRef = useRef(null);
@@ -88,11 +89,25 @@ export const usePostLogic = ({ currentUser, post }) => {
   const handleLike = () => {
     likeUnlikeMutation.mutate(data.includes(currentUser.id));
   };
-  const handleDelete = () => {
+
+  const handlePostDelete = () => {
     deleteMutation.mutate(post.id);
   };
+
   const handleEdit = () => {
+    if (editedDescription === "") {
+      setShowError(true);
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+      return;
+    }
     editMutation.mutate({ description: editedDescription });
+  };
+
+  const handleCancelEdit = () => {
+    setEditMode(false);
+    setEditedDescription(post.description);
   };
 
   // Automatically exit edit mode if this component is reused for a different post
@@ -105,7 +120,7 @@ export const usePostLogic = ({ currentUser, post }) => {
     setMenuOpen,
     menuOpen,
     menuRef,
-    handleDelete,
+    handlePostDelete,
     setEditMode,
     editMode,
     editedDescription,
@@ -117,5 +132,7 @@ export const usePostLogic = ({ currentUser, post }) => {
     handleLike,
     setCommentOpen,
     commentOpen,
+    showError,
+    handleCancelEdit,
   };
 };

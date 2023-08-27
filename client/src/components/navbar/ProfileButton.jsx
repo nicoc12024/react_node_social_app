@@ -1,3 +1,4 @@
+import React from "react";
 import PersonOutlinedIcon from "@mui/icons-material/PersonOutlined";
 
 export default function ProfileButton({
@@ -10,22 +11,28 @@ export default function ProfileButton({
   currentUser,
 }) {
   return (
-    <div
+    <button
       className={`flex items-center hover:bg-gray-300 rounded-md p-[6px] cursor-pointer relative ${className}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       onClick={onClick}
+      data-testid="profile-button-container"
+      aria-label="Profile"
     >
       {desktop ? (
         <>
           <img
             src={`/upload/${currentUser.id}/${currentUser.profilePicture}`}
-            alt=""
+            alt={currentUser.name}
             className="w-[25px] h-[25px] rounded-[50%] object-cover"
           />
         </>
       ) : (
-        <PersonOutlinedIcon fontSize="small" className="cursor-pointer md:block hidden" />
+        <PersonOutlinedIcon
+          fontSize="small"
+          className="cursor-pointer md:block hidden"
+          data-testid="profile-icon"
+        />
       )}
 
       {showProfileTooltip && (
@@ -33,6 +40,6 @@ export default function ProfileButton({
           <p>Profile</p>
         </div>
       )}
-    </div>
+    </button>
   );
 }

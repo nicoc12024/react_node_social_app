@@ -39,7 +39,7 @@ const Post = ({ post }) => {
     setMenuOpen,
     menuOpen,
     menuRef,
-    handleDelete,
+    handlePostDelete,
     setEditMode,
     editMode,
     editedDescription,
@@ -51,6 +51,8 @@ const Post = ({ post }) => {
     handleLike,
     setCommentOpen,
     commentOpen,
+    showError,
+    handleCancelEdit,
   } = usePostLogic({ currentUser, post });
 
   return (
@@ -63,7 +65,7 @@ const Post = ({ post }) => {
             setMenuOpen={setMenuOpen}
             menuOpen={menuOpen}
             menuRef={menuRef}
-            handleDelete={handleDelete}
+            handlePostDelete={handlePostDelete}
             setEditMode={setEditMode}
           />
           <PostContent
@@ -74,6 +76,8 @@ const Post = ({ post }) => {
             post={post}
             handleEdit={handleEdit}
             setEditMode={setEditMode}
+            showError={showError}
+            handleCancelEdit={handleCancelEdit}
           />
           <PostFooter
             isLoading={isLoading}

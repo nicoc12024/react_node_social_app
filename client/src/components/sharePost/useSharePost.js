@@ -1,11 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export const useSharePost = () => {
   const [file, setFile] = useState(null);
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const queryClient = useQueryClient();
 
@@ -31,16 +32,30 @@ export const useSharePost = () => {
     }
   };
 
+  useEffect(() => {
+    if (showError) {
+      setTimeout(() => {
+        setShowError(false);
+      }, 3000);
+    }
+  });
+
   const handleShare = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    let imageUrl = "";
-    if (file) imageUrl = await uploadImage();
-    createPostMutation.mutate({ description, image: imageUrl });
-    setDescription("");
-    setFile(null);
-    setIsSubmitting(false);
+    if (description === "") {
+      setIsSubmitting(false);
+      setShowError(true);
+    } else {
+      let imageUrl = "";
+      if (file) imageUrl = await uploadImage();
+      createPostMutation.mutate({ description, image: imageUrl });
+      setDescription("");
+      setFile(null);
+      setIsSubmitting(false);
+      setShowError(false);
+    }
   };
 
   return {
@@ -50,5 +65,6 @@ export const useSharePost = () => {
     setDescription,
     isSubmitting,
     handleShare,
+    showError,
   };
 };

@@ -5,7 +5,8 @@ const PostContent = ({
   textAreaRef,
   post,
   handleEdit,
-  setEditMode,
+  showError,
+  handleCancelEdit,
 }) =>
   editMode ? (
     <div className="my-5 flex flex-col">
@@ -14,16 +15,23 @@ const PostContent = ({
         onChange={(e) => setEditedDescription(e.target.value)}
         className="bg-gray-100 py-1 px-2 rounded-md w-full outline-none"
         ref={textAreaRef}
-      />{" "}
-      <img
-        src={"/upload/" + post.image}
-        alt=""
-        className="w-[100%] max-h-[500px] object-cover mt-5"
       />
+      {post.image && (
+        <img
+          src={"/upload/" + post.image}
+          alt=""
+          className="w-[100%] max-h-[500px] object-cover mt-5"
+        />
+      )}
       {/* Edit Mode: Buttons for saving or canceling changes */}
       <div className="flex justify-end gap-2 mt-4 font-semibold">
+        {showError && (
+          <div className="text-red-500 my-auto text-sm font-normal">
+            Please write something
+          </div>
+        )}
         <button
-          onClick={() => setEditMode(false)}
+          onClick={handleCancelEdit}
           className="border-none py-[5px] px-[10px] text-black cursor-pointer bg-gray-100 rounded-[3px]"
         >
           Cancel
@@ -37,13 +45,15 @@ const PostContent = ({
       </div>
     </div>
   ) : (
-    <div className="my-5">
+    <div className="my-4">
       <p>{post.description}</p>
-      <img
-        src={"/upload/" + post.image}
-        alt=""
-        className="w-[100%] max-h-[500px] object-cover mt-5"
-      />
+      {post.image && (
+        <img
+          src={"/upload/" + post.image}
+          alt=""
+          className="w-[100%] max-h-[500px] object-cover mt-5"
+        />
+      )}
     </div>
   );
 

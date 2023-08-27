@@ -1,4 +1,3 @@
-// useFollow.js
 import { useState, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { makeRequest } from "../axios";

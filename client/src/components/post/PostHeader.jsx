@@ -9,7 +9,7 @@ const PostHeader = ({
   setMenuOpen,
   menuOpen,
   menuRef,
-  handleDelete,
+  handlePostDelete,
   setEditMode,
 }) => {
   const { handleFollow } = useFollow();
@@ -19,7 +19,7 @@ const PostHeader = ({
       <div className="flex gap-3">
         <img
           src={`/upload/${post.userId}/${post.profilePicture}`}
-          alt=""
+          alt={post.name}
           className="w-[40px] h-[40px] rounded-full object-cover"
         />
         <div className="flex flex-col">
@@ -34,19 +34,23 @@ const PostHeader = ({
       </div>
       <div className="relative">
         <MoreHorizIcon
-          onClick={() => setMenuOpen(!menuOpen)}
+          onClick={() => setMenuOpen((prevMenuOpen) => !prevMenuOpen)}
           className="cursor-pointer"
+          data-testid="three-dots-icon"
         />
         {menuOpen && (
           <div
+            role="menu"
+            data-testid="dropDownMenu"
             ref={menuRef}
             className="absolute rounded-md right-0 bg-white shadow-[rgba(0,0,0,0.35)_0px_5px_12px] font-semibold text-black text-sm p-2"
           >
             {post.userId === currentUser.id ? (
               <>
                 <button
-                  onClick={handleDelete}
+                  onClick={handlePostDelete}
                   className="py-1 px-4 rounded-sm hover:bg-gray-100"
+                  data-testid="delete-post-button"
                 >
                   Delete
                 </button>
@@ -68,6 +72,7 @@ const PostHeader = ({
                   handleFollow(post.userId);
                 }}
                 className="py-1 px-4 rounded-sm hover:bg-gray-100 w-full text-left"
+                data-testid="unfollow-button"
               >
                 Unfollow
               </button>
