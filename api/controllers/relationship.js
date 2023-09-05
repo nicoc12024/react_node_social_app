@@ -14,7 +14,7 @@ export const getAllRelationshipsForCurrentUser = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("You are not logged in!");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = "SELECT followedUserId FROM relationships WHERE followerUserId = ?";
@@ -32,7 +32,7 @@ export const addRelationship = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("You are not logged in!");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q = "INSERT INTO relationships (`followerUserId`, `followedUserId`) VALUES (?)";
@@ -50,7 +50,7 @@ export const deleteRelationship = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("You are not logged in!");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token is not valid!");
 
     const q =

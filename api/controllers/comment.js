@@ -17,7 +17,7 @@ export const addComment = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q =
@@ -43,7 +43,7 @@ export const deleteComment = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     // Optional: Check if the user is the author of the comment
@@ -72,7 +72,7 @@ export const editComment = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     // Optional: Check if the user is the author of the comment

@@ -8,7 +8,7 @@ export const getPosts = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q =
@@ -32,7 +32,7 @@ export const addPost = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q =
@@ -57,7 +57,7 @@ export const deletePost = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q = "DELETE FROM posts WHERE id = ? AND userId = ?";
@@ -75,7 +75,7 @@ export const editPost = (req, res) => {
 
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q = "UPDATE posts SET description = ? WHERE id = ? AND userId = ?";

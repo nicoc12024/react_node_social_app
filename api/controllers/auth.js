@@ -85,7 +85,10 @@ export const login = async (req, res) => {
   // Check if user exists
   const q = "SELECT * FROM users WHERE email = ?";
   db.query(q, [req.body.email], (err, data) => {
-    if (err) return res.status(500).json(err);
+    if (err) {
+      console.error(err);
+      return res.status(500).json("Internal server error");
+    }
     if (!data.length) return res.status(404).json("User not found");
 
     // Check if password is correct
@@ -93,7 +96,7 @@ export const login = async (req, res) => {
     if (!validPassword) return res.status(400).json("Wrong password or email");
 
     // Create and assign a token
-    const token = jwt.sign({ id: data[0].id }, "secretKey");
+    const token = jwt.sign({ id: data[0].id }, process.env.SECRET_KEY);
     const { password, ...info } = data[0];
 
     // Send token in cookie

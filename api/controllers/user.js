@@ -31,7 +31,7 @@ export const updateUser = (req, res) => {
   const token = req.cookies.accessToken;
   if (!token) return res.status(401).json("Not logged in");
 
-  jwt.verify(token, "secretKey", (err, userInfo) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, userInfo) => {
     if (err) return res.status(403).json("Token not valid");
 
     const q =

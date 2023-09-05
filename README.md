@@ -1,16 +1,32 @@
 ## Fullstack Social Media App
 
-This project I built to learn more about React Query and Node Js with Express Js. I used JWT token for authentication, MySQL for database and cookies for storing the JWT token. It's a social media app where you can create an account, post sharing, follow/unfollow system, customizable user profile page (including profile and cover picture and basic info), like a comment functionalities.
+A social media application built with React and Node.js, featuring JWT authentication, post sharing, following system, customizable user profiles, and more.
 
 ## Technologies used
 
-- Backend: Node JS, Express JS, MySQL, JWT for authentication, cookies for session management
+- Backend: Node.js, Express, MySQL, JWT for authentication, cookies for session management
 - Frontend: React, React Query, Context API, Material-UI, Tailwind
 
 ## Installation
 
-After cloning the repository you should install the application by typing in the terminal "npm install react-app" and then "npm start".
+After cloning the repository, install the application by typing the following in your terminal:
+
+- npm install
+- npm start
+
 Open http://localhost:3000 to view it in your browser.
+
+Note: Make sure to set up your environment variables in api/.env for the backend to work correctly. Check the Environment Variables section below for more details.
+
+## Environment Variables
+
+In order for the app to function correctly, the user must set up their own environment variables. There should be a .env file containing the following:
+
+- SECRET_KEY=your_secret_key_here
+- DB_HOST=your_database_host_here
+- DB_USER=your_database_user_here
+- DB_PASSWORD=your_database_password_here
+- DB_DATABASE=your_database_name_here
 
 ## Quick Overview
 
