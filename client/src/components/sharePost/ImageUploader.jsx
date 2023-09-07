@@ -1,6 +1,6 @@
 import Image from "../../assets/img.png";
 
-const ImageUploader = ({ file, setFile }) => {
+const ImageUploader = ({ setFile }) => {
   return (
     <div className="flex items-center gap-5">
       <input

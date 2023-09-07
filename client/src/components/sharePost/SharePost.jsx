@@ -62,7 +62,7 @@ const SharePost = () => {
           <div className="text-red-500 mb-2 text-sm">Please write something</div>
         )}
         <div className="flex items-center justify-between">
-          <ImageUploader file={file} setFile={setFile} />
+          <ImageUploader setFile={setFile} />
           <ShareButton onClick={handleShare} />
         </div>
       </form>

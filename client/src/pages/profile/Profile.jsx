@@ -57,7 +57,7 @@ const Profile = () => {
               relationshipData={relationshipData}
             />
             <Posts userId={userId} />
-          </div>{" "}
+          </div>
           {/* Update modal */}
           {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
         </>

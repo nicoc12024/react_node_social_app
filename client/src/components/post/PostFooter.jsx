@@ -17,9 +17,13 @@ const PostFooter = ({
       {isLoading ? (
         "Loading"
       ) : data.includes(currentUser.id) ? (
-        <FavoriteOutlinedIcon className="text-red-500" onClick={handleLike} />
+        <FavoriteOutlinedIcon
+          className="text-red-500"
+          onClick={handleLike}
+          data-testid="liked-icon-red"
+        />
       ) : (
-        <FavoriteBorderOutlinedIcon onClick={handleLike} />
+        <FavoriteBorderOutlinedIcon onClick={handleLike} data-testid="like-icon" />
       )}
       {data ? data.length : 0} Likes
     </div>

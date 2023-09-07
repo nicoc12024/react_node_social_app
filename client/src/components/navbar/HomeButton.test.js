@@ -1,5 +1,6 @@
 import React from "react";
-import { render, fireEvent, screen } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import HomeButton from "./HomeButton";
 import "@testing-library/jest-dom";
 
@@ -21,7 +22,7 @@ describe("HomeButton", () => {
   test("calls onClick handler when icon is clicked", () => {
     const handleClick = jest.fn();
     render(<HomeButton onClick={handleClick} />);
-    fireEvent.click(screen.getByTestId("home-icon"));
+    userEvent.click(screen.getByTestId("home-icon"));
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 
@@ -31,9 +32,9 @@ describe("HomeButton", () => {
     render(
       <HomeButton onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} />
     );
-    fireEvent.mouseEnter(screen.getByTestId("home-button-container"));
+    userEvent.hover(screen.getByTestId("home-button-container"));
     expect(handleMouseEnter).toHaveBeenCalledTimes(1);
-    fireEvent.mouseLeave(screen.getByTestId("home-button-container"));
+    userEvent.unhover(screen.getByTestId("home-button-container"));
     expect(handleMouseLeave).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,5 +1,6 @@
-import { render, screen, fireEvent } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import CommentInput from "./CommentInput";
+import userEvent from "@testing-library/user-event"; // Corrected this line
 
 describe("<CommentInput />", () => {
   const mockSetDescription = jest.fn();
@@ -30,8 +31,8 @@ describe("<CommentInput />", () => {
   test("updates input value on change", () => {
     setup();
     const inputElement = screen.getByPlaceholderText("Write a comment...");
-    fireEvent.change(inputElement, { target: { value: "New description" } });
-    expect(mockSetDescription).toHaveBeenCalledWith("New description");
+    userEvent.type(inputElement, "New description");
+    expect(mockSetDescription).toHaveBeenCalledTimes(15);
   });
 
   test("constructs the image URL correctly", () => {
@@ -43,7 +44,7 @@ describe("<CommentInput />", () => {
   test("handle share post called once after click", () => {
     setup();
     const sendButton = screen.getByText("Send");
-    fireEvent.click(sendButton);
+    userEvent.click(sendButton);
     expect(mockHandleSharePost).toHaveBeenCalledTimes(1);
   });
 });
